@@ -24,7 +24,6 @@
 		<property name="locations">
 			<list>
 				<value>classpath:config.properties</value>
-				<value>classpath:META-INF/database.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -34,7 +33,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 		<property name="jpaDialect" ref="jpaDialect" />
-		<property name="packagesToScan" value="hu.acsadam.vaadinbootstrap" />
+		<property name="packagesToScan" value="com.si.ha" />
 	</bean>
 
 
@@ -48,18 +47,18 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<jpa:repositories base-package="hu.acsadam.vaadinbootstrap" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" />
+	<jpa:repositories base-package="com.si.ha" transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory" />
 
 
 	<context:annotation-config />
-	<context:component-scan base-package="hu.acsadam.vaadinbootstrap" />
+	<context:component-scan base-package="com.si.ha" />
 
 	<task:annotation-driven executor="myExecutor" scheduler="myScheduler" />
 	<task:executor id="myExecutor" pool-size="5" />
 	<task:scheduler id="myScheduler" pool-size="10" />
 
 
-	<beans profile="dev">
+	<beans profile="db-inmemory">
 		<jdbc:embedded-database id="dataSource" type="H2">
 			<jdbc:script location="classpath:/data.sql" encoding="utf-8" />
 		</jdbc:embedded-database>
@@ -71,7 +70,7 @@
 		
 		<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 			<property name="dataSource" ref="dataSource" />
-			<property name="packagesToScan" value="hu.acsadam.vaadinbootstrap" />
+			<property name="packagesToScan" value="com.si.ha" />
 			<property name="hibernateProperties">
 				<props>
 					<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
@@ -84,12 +83,12 @@
 		</bean>
 	</beans>
 	
-	<beans profile="prod" >
+	<beans profile="db-mysql" >
 		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-			<property name="driverClassName" value="${jdbc.driverClassName}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
+			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+			<property name="url" value="jdbc\:mysql\://localhost\:3306/kconsult" />
+			<property name="username" value="aacs" />
+			<property name="password" value="123qwe" />
 		</bean>
 
 		<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -99,7 +98,7 @@
 
 		<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 			<property name="dataSource" ref="dataSource" />
-			<property name="packagesToScan" value="hu.acsadam.vaadinbootstrap" />
+			<property name="packagesToScan" value="com.si.ha" />
 			<property name="hibernateProperties">
 				<props>
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>

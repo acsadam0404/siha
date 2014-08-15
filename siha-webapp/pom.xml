@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>vaadinbootstrap-webapp</artifactId>
+	<artifactId>siha-webapp</artifactId>
 	<packaging>war</packaging>
-	<name>vaadinbootstrap</name>
-	
+	<name>SIHA</name>
+
 	<parent>
-		<groupId>hu.acsadam.vaadinbootstrap</groupId>
-		<artifactId>vaadinbootstrap-superpom</artifactId>
-		<version>1.2.1</version>
+		<groupId>com.si.ha</groupId>
+		<artifactId>siha-superpom</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
-			<groupId>hu.acsadam.vaadinbootstrap</groupId>
-			<artifactId>vaadinbootstrap-backend</artifactId>
+			<groupId>com.si.ha</groupId>
+			<artifactId>siha-backend</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>hu.acsadam.vaadinbootstrap</groupId>
-			<artifactId>vaadinbootstrap-vaadin</artifactId>
+			<groupId>com.si.ha</groupId>
+			<artifactId>siha-vaadin</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>fastformfields</artifactId>
 		</dependency>
 
 		<dependency>
@@ -56,57 +51,28 @@
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
 
+		<!-- <dependency> -->
+		<!-- <groupId>javax.servlet</groupId> -->
+		<!-- <artifactId>javax.servlet-api</artifactId> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
 
 		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>maskedtextfield</artifactId>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.2.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>contextmenu</artifactId>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.2.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>activelink</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>filteringtable</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.alump.distributionbar</groupId>
-			<artifactId>dbar-addon</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.wcs.wcslib</groupId>
-			<artifactId>wcslib-vaadin-widget-multifileupload</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>tokenfield</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>buttongroup</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.addon</groupId>
-			<artifactId>confirmdialog</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -151,15 +117,6 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-ldap</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.ldap</groupId>
-			<artifactId>spring-ldap-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.ldap</groupId>
-			<artifactId>spring-ldap-core-tiger</artifactId>
 		</dependency>
 
 		<dependency>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>hu.acsadam.vaadinbootstrap</groupId>
-	<artifactId>vaadinbootstrap-superpom</artifactId>
+	<groupId>com.si.ha</groupId>
+	<artifactId>siha-superpom</artifactId>
 	<version>${project.version}</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<project.version>1.2.1</project.version>
+		<project.version>1.0.0-SNAPSHOT</project.version>
 		<javac.version>1.7</javac.version>
 		<slf4j.version>1.7.6</slf4j.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<vaadin.version>7.3.0.beta1</vaadin.version>
+		<vaadin.version>7.2.5</vaadin.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 		<org.springframework.version>4.0.0.RELEASE</org.springframework.version>
 		<spring.security.version>3.2.3.RELEASE</spring.security.version>
@@ -66,14 +66,14 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>hu.acsadam.vaadinbootstrap</groupId>
-				<artifactId>vaadinbootstrap-backend</artifactId>
+				<groupId>com.si.ha</groupId>
+				<artifactId>siha-backend</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>hu.acsadam.vaadinbootstrap</groupId>
-				<artifactId>vaadinbootstrap-vaadin</artifactId>
+				<groupId>com.si.ha</groupId>
+				<artifactId>siha-vaadin</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -87,18 +87,6 @@
 				<groupId>org.apache.directory.server</groupId>
 				<artifactId>apacheds-all</artifactId>
 				<version>2.0.0-M16</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.vaadin.addons</groupId>
-				<artifactId>maskedtextfield</artifactId>
-				<version>0.1.6</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.vaadin.addons</groupId>
-				<artifactId>fastformfields</artifactId>
-				<version>0.1.6</version>
 			</dependency>
 
 			<dependency>
@@ -183,54 +171,11 @@
 				<version>${vaadin.version}</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.vaadin.addons</groupId>
-				<artifactId>contextmenu</artifactId>
-				<version>4.4.0</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.vaadin.addons</groupId>
-				<artifactId>activelink</artifactId>
-				<version>7.0.2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.vaadin.addons</groupId>
-				<artifactId>buttongroup</artifactId>
-				<version>2.3</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.vaadin.alump.distributionbar</groupId>
-				<artifactId>dbar-addon</artifactId>
-				<version>1.0.0.beta2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.wcs.wcslib</groupId>
-				<artifactId>wcslib-vaadin-widget-multifileupload</artifactId>
-				<version>1.6.1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.vaadin.addons</groupId>
-				<artifactId>tokenfield</artifactId>
-				<version>7.0.1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.vaadin.addon</groupId>
-				<artifactId>confirmdialog</artifactId>
-				<version>2.0.5</version>
-			</dependency>
-
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>3.0.1</version>
-				<scope>provided</scope>
-			</dependency>
+<!-- 			<dependency> -->
+<!-- 				<groupId>javax.servlet</groupId> -->
+<!-- 				<version>3.0.1</version> -->
+<!-- 				<scope>provided</scope> -->
+<!-- 			</dependency> -->
 
 			<dependency>
 				<groupId>javax.inject</groupId>
@@ -268,29 +213,6 @@
 				<version>${spring.security.version}</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.springframework.ldap</groupId>
-				<artifactId>spring-ldap-core</artifactId>
-				<version>2.0.1.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.ldap</groupId>
-				<artifactId>spring-ldap-core-tiger</artifactId>
-				<version>2.0.1.RELEASE</version>
-			</dependency>
-
-
-			<dependency>
-				<groupId>org.vaadin.addons</groupId>
-				<artifactId>filteringtable</artifactId>
-				<version>0.9.8.v7</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.vaadin.addons</groupId>
-				<artifactId>tableexport</artifactId>
-				<version>1.4.0</version>
-			</dependency>
 
 			<dependency>
 				<groupId>org.springframework</groupId>
