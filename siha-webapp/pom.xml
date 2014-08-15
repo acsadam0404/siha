@@ -30,6 +30,12 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-server</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-theme-compiler</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -56,7 +62,11 @@
 		<!-- <artifactId>javax.servlet-api</artifactId> -->
 		<!-- <scope>provided</scope> -->
 		<!-- </dependency> -->
-
+		<dependency>
+			<groupId>org.peimari</groupId>
+			<artifactId>dawn</artifactId>
+			<version>2-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
@@ -281,9 +291,7 @@
 						<goals>
 							<goal>clean</goal>
 							<goal>resources</goal>
-							<goal>update-theme</goal>
 							<goal>update-widgetset</goal>
-							<goal>compile-theme</goal>
 							<goal>compile</goal>
 						</goals>
 					</execution>
