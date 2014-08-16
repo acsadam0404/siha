@@ -79,6 +79,13 @@
 
 			<dependency>
 				<groupId>com.si.ha</groupId>
+				<artifactId>siha-rest-server</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>com.si.ha</groupId>
 				<artifactId>siha-vaadin</artifactId>
 				<version>${project.version}</version>
 			</dependency>

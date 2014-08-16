@@ -19,6 +19,11 @@
 
 		<dependency>
 			<groupId>com.si.ha</groupId>
+			<artifactId>siha-rest-server</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.si.ha</groupId>
 			<artifactId>siha-vaadin</artifactId>
 		</dependency>
 
