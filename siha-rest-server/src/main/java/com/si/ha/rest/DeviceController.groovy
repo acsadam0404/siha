@@ -4,8 +4,8 @@ import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -34,6 +34,15 @@ class DeviceController {
 			new Device(name: d.name)
 		}
 		return devices
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	Device get(@PathVariable('id') id) {
+		com.si.ha.device.Device found = deviceService.get(Long.parseLong(id))
+
+		return new Device(name: found.name) 
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

@@ -3,39 +3,43 @@ package com.si.ha.rest;
 import static groovy.test.GroovyAssert.*
 import static org.junit.Assert.*
 
+import org.junit.Before
 import org.junit.Test
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.web.client.RestTemplate
 
 import com.si.ha.rest.device.Device
 
-class DeviceControllerTest  {
+class DeviceControllerTest extends RestControllerTest {
 
 	@Test
-	void getOrders() {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
-		RestTemplate template = new RestTemplate();
-
-		HttpEntity<String> requestEntity = new HttpEntity<String>("",headers);
-
-		ResponseEntity<Device> entity = template.getForEntity(
+	void findAll() {
+		List<Device> devices = template.getForObject(
 				"http://localhost:18080/siha/rest/devices",
+				List.class);
+
+		assert(!devices?.isEmpty())
+	}
+
+	@Test
+	void get() {
+		ResponseEntity<Device> entity = template.getForEntity(
+				"http://localhost:18080/siha/rest/devices/1",
 				Device.class);
 
-		String path = entity.getHeaders().getLocation().getPath();
+		assertEquals(HttpStatus.OK, entity.getStatusCode());
+		Device device = entity.getBody();
+		assert(device)
+	}
 
-		assertEquals(HttpStatus.CREATED, entity.getStatusCode());
-		assertTrue(path.startsWith("/siha/rest/devices"));
-		Device Device = entity.getBody();
-
-		System.out.println ("The Device name is " + device.name);
-		System.out.println ("The Location is " + entity.getHeaders().getLocation());
+	@Test
+	void create() {
+		Device created = template.postForObject("http://acspc.acsadam.hu:18080/siha/rest/devices/", new Device(name:"test"), Device.class)
+		assert(created?.name == 'test')
 	}
 }
