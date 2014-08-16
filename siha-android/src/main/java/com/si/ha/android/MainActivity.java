@@ -14,9 +14,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.si.ha.rest.device.Device;
 import com.si.ha.android.qrcode.IntentIntegrator;
 import com.si.ha.android.qrcode.IntentResult;
 
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -58,18 +60,26 @@ public class MainActivity extends ActionBarActivity {
         if (scanResult != null) {
 
             // handle scan result
-            String contantsString =  scanResult.getContents()==null?"0":scanResult.getContents();
-            if (contantsString.equalsIgnoreCase("0")) {
-                Toast.makeText(this, "Problem to get the  contant Number", Toast.LENGTH_LONG).show();
+            String contentsString =  scanResult.getContents()==null?"0":scanResult.getContents();
+            if (contentsString.equalsIgnoreCase("0")) {
+                Toast.makeText(this, "Problem to get the  content Number", Toast.LENGTH_LONG).show();
 
             }else {
-                Toast.makeText(this, contantsString, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, contentsString, Toast.LENGTH_LONG).show();
+                Device device = new Device();
+                device.setName("testdevice1");
 
+
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+                restTemplate.postForObject("http://localhost:18080/rest/devices", device, String.class);
             }
 
         }
         else{
-            Toast.makeText(this, "Problem to secan the barcode.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Problem to scan the barcode.", Toast.LENGTH_LONG).show();
         }
     }
 
