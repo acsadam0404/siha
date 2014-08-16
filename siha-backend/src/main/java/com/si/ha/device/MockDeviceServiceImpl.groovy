@@ -28,6 +28,7 @@ class MockDeviceServiceImpl implements DeviceService {
 	}
 	
 	Device get(Long id) {
-		return devices[id]
+		int i = id.intValue()
+		return devices[i]
 	}
 }
