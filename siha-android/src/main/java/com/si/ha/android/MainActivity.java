@@ -14,13 +14,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.si.ha.rest.device.Device;
+import com.si.ha.rest.device.*;
+
 import com.si.ha.android.qrcode.IntentIntegrator;
 import com.si.ha.android.qrcode.IntentResult;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -42,14 +50,11 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.initiateScan();
-
-
+                //new PostDeviceTask().execute("AANDDROOID");
             }
         });
-        new HttpRequestTask().execute();
     }
 
     @Override
@@ -60,25 +65,15 @@ public class MainActivity extends ActionBarActivity {
         if (scanResult != null) {
 
             // handle scan result
-            String contentsString =  scanResult.getContents()==null?"0":scanResult.getContents();
+            String contentsString = scanResult.getContents() == null ? "0" : scanResult.getContents();
             if (contentsString.equalsIgnoreCase("0")) {
                 Toast.makeText(this, "Problem to get the  content Number", Toast.LENGTH_LONG).show();
 
-            }else {
-                Toast.makeText(this, contentsString, Toast.LENGTH_LONG).show();
-                Device device = new Device();
-                device.setName("testdevice1");
-
-
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-
-                restTemplate.postForObject("http://localhost:18080/rest/devices", device, String.class);
+            } else {
+                new PostDeviceTask().execute(contentsString);
             }
 
-        }
-        else{
+        } else {
             Toast.makeText(this, "Problem to scan the barcode.", Toast.LENGTH_LONG).show();
         }
     }
@@ -98,7 +93,6 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            new HttpRequestTask().execute();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -120,31 +114,36 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    class PostDeviceTask extends AsyncTask<String, Void, Device> {
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, Greeting> {
-        @Override
-        protected Greeting doInBackground(Void... params) {
+
+        protected Device doInBackground(String... content) {
+            Device device = new Device();
+            device.setName(content[0]);
+
+            RestTemplate restTemplate = new RestTemplate();
+            List<HttpMessageConverter<?>> cnvs = new ArrayList<>();
+            cnvs.add(new MappingJackson2HttpMessageConverter());
+            restTemplate.setMessageConverters(cnvs);
+
+            //String str = restTemplate.getForObject("http://acspc.acsadam.hu:18080/siha/rest/devices", String.class);
+            // restTemplate.postForObject("http://acspc.acsadam.hu:18080/siha/rest/devices", device, Device.class);
             try {
-                final String url = "http://rest-service.guides.spring.io/greeting";
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Greeting greeting = restTemplate.getForObject(url, Greeting.class);
-                return greeting;
-            } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
+                Device result = restTemplate.postForObject("http://acspc.acsadam.hu:18080/siha/rest/devices/", device, Device.class);
+                return result;
+            } catch (Throwable t) {
+                Log.e("D", "resthívás szar", t);
+                throw t;
             }
-
-            return null;
+            // Device result = restTemplate.getForObject("http://acspc.acsadam.hu:18080/siha/rest/devices/1", Device.class);
         }
 
-        @Override
-        protected void onPostExecute(Greeting greeting) {
-            TextView greetingIdText = (TextView) findViewById(R.id.id_value);
-            TextView greetingContentText = (TextView) findViewById(R.id.content_value);
-            greetingIdText.setText(greeting.getId());
-            greetingContentText.setText(greeting.getContent());
-        }
+        protected void onPostExecute(Device device) {
 
+            Toast.makeText(MainActivity.this, device.getName(), Toast.LENGTH_LONG).show();
+            Log.i("D", device.toString());
+
+        }
     }
 
 }
