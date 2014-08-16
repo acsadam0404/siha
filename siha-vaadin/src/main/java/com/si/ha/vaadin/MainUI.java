@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Scope;
 import ru.xpoft.vaadin.DiscoveryNavigator;
 import ru.xpoft.vaadin.security.ShiroSecurityNavigator;
 
-import com.si.ha.security.ServiceLocator;
+import com.si.ha.ServiceLocator;
 import com.si.ha.vaadin.security.LandingPage;
 import com.si.ha.vaadin.security.LoginComp;
 import com.si.ha.vaadin.security.LoginComp.LoginListener;
