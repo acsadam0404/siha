@@ -10,14 +10,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 class MockDeviceServiceImpl implements DeviceService {
-
+	List devices = [
+		new Device(name: 'testdevice1', id: 1),
+		new Device(name: 'testdevice2', id: 2)
+	]
+	
 	@Override
 	List<Device> findAll() {
-		[
-			new Device(name: 'testdevice1'), 
-			new Device(name: 'testdevice2')
-		]
+		return devices
 	}
 
-
+	@Override
+	Device create(Device device) {
+		device.id = devices.size()
+		devices << device
+		return device
+	}
+	
+	Device get(Long id) {
+		return devices[id]
+	}
 }

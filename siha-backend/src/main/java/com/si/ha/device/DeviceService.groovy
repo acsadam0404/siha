@@ -4,4 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface DeviceService {
 	List<Device> findAll()
+	
+	Device create(Device device)
+	
+	Device get(Long id)
 }
