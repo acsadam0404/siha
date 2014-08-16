@@ -73,6 +73,12 @@
 
 			<dependency>
 				<groupId>com.si.ha</groupId>
+				<artifactId>siha-rest</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.si.ha</groupId>
 				<artifactId>siha-vaadin</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -171,11 +177,11 @@
 				<version>${vaadin.version}</version>
 			</dependency>
 
-<!-- 			<dependency> -->
-<!-- 				<groupId>javax.servlet</groupId> -->
-<!-- 				<version>3.0.1</version> -->
-<!-- 				<scope>provided</scope> -->
-<!-- 			</dependency> -->
+			<!-- <dependency> -->
+			<!-- <groupId>javax.servlet</groupId> -->
+			<!-- <version>3.0.1</version> -->
+			<!-- <scope>provided</scope> -->
+			<!-- </dependency> -->
 
 			<dependency>
 				<groupId>javax.inject</groupId>
