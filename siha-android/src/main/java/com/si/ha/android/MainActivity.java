@@ -1,6 +1,6 @@
 package com.si.ha.android;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
- 
+import android.widget.Toast;
+
+import com.si.ha.android.qrcode.IntentIntegrator;
+import com.si.ha.android.qrcode.IntentResult;
+
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,7 +36,41 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        findViewById(R.id.scanner).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
+                integrator.initiateScan();
+
+
+            }
+        });
         new HttpRequestTask().execute();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (scanResult != null) {
+
+            // handle scan result
+            String contantsString =  scanResult.getContents()==null?"0":scanResult.getContents();
+            if (contantsString.equalsIgnoreCase("0")) {
+                Toast.makeText(this, "Problem to get the  contant Number", Toast.LENGTH_LONG).show();
+
+            }else {
+                Toast.makeText(this, contantsString, Toast.LENGTH_LONG).show();
+
+            }
+
+        }
+        else{
+            Toast.makeText(this, "Problem to secan the barcode.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

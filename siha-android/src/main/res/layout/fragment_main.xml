@@ -40,4 +40,14 @@
         android:layout_alignTop="@+id/content_label"
         android:layout_alignLeft="@+id/id_value" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:id="@+id/scanner"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/content_label"
+        android:layout_alignRight="@+id/id_value"
+        android:layout_alignEnd="@+id/id_value" />
+
 </RelativeLayout>
