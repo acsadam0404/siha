@@ -7,6 +7,12 @@
         <dependent-module archiveName="siha-backend-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/siha-backend/siha-backend">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="siha-rest-server-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/siha-rest-server/siha-rest-server">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="siha-rest-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/siha-rest/siha-rest">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="siha-vaadin-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/siha-vaadin/siha-vaadin">
             <dependency-type>uses</dependency-type>
         </dependent-module>
