@@ -9,14 +9,14 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
 public class LandingPage extends CustomComponent {
-	public LandingPage(LoginListener loginListener) {
+	public LandingPage() {
 		setSizeFull();
 		VerticalLayout root = new VerticalLayout();
 		root.setSizeFull();
 		
 		TabSheet ts = new TabSheet();
 		ts.setSizeUndefined();
-		ts.addTab(new LoginComp(loginListener), "Sign In");
+		ts.addTab(new LoginComp(), "Sign In");
 		ts.addTab(new RegistrationComp(), "Registration");
 		
 		
