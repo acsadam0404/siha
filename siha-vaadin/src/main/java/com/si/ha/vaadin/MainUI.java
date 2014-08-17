@@ -12,7 +12,9 @@ import com.si.ha.events.EventBus;
 import com.si.ha.vaadin.security.LandingPage;
 import com.si.ha.vaadin.security.SuccessfulLoginEvent;
 import com.si.ha.vaadin.security.VaadinSecurityContext;
+import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.Push;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
@@ -30,11 +32,10 @@ import com.vaadin.ui.VerticalLayout;
 public class MainUI extends UI {
 	private static final Logger logger = Logger.getLogger(MainUI.class);
 
-	private final VerticalLayout main = new VerticalLayout();
+	private VerticalLayout main;
 	private final VerticalLayout content = new VerticalLayout();
 
 	public MainUI() {
-		super();
 		Locale locale = new Locale("hu", "HU");
 		setLocale(locale);
 		VaadinSession.getCurrent().setLocale(locale);
@@ -44,8 +45,6 @@ public class MainUI extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 		EventBus.register(this);
-		main.setSizeFull();
-		main.addStyleName("main-layout");
 		setSizeFull();
 
 		if (VaadinSecurityContext.getSubject().isAuthenticated()) {
@@ -57,15 +56,21 @@ public class MainUI extends UI {
 	}
 
 	@Override
-    public void detach() {
-        EventBus.unregister(this);
-        super.detach();
-    }
-	
+	public void detach() {
+		EventBus.unregister(this);
+		super.detach();
+	}
+
 	private void init() {
+		main =  new VerticalLayout();
+		main.setSizeFull();
+		main.addStyleName("main-layout");
 		content.setSizeFull();
-		main.addComponent(new HeaderComp());
+		HeaderComp header = new HeaderComp();
+		main.addComponent(header);
 		main.addComponent(content);
+		main.setExpandRatio(header, 0.1f);
+		main.setExpandRatio(content, 0.9f);
 		setContent(main);
 	}
 
@@ -79,16 +84,19 @@ public class MainUI extends UI {
 		init();
 	}
 
+	/**
+	 * EventBus.post(new PushEvent()) -el hívandó
+	 */
 	@Subscribe
 	public void handlePush(final PushEvent event) {
 		access(new Runnable() {
 			@Override
 			public void run() {
 				event.run();
-				push();				
+				push();
 			}
 		});
-		
+
 	}
-	
+
 }
