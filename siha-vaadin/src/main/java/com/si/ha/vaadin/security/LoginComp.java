@@ -6,6 +6,7 @@ import org.apache.shiro.subject.Subject;
 
 import com.si.ha.vaadin.HomeView;
 import com.si.ha.vaadin.MainUI;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -24,7 +25,7 @@ public class LoginComp extends CustomComponent implements ClickListener {
 
 	private TextField usernameField = new TextField("Username");
 	private PasswordField passwordField = new PasswordField("Password");
-	private Button loginButton = new Button("Login", this);
+	private Button loginButton = new Button("Sign In", FontAwesome.UNLOCK);
 	private Label invalidPasswordField = new Label("Invalid username or password");
 
 	private LoginListener loginListener;
@@ -60,6 +61,8 @@ public class LoginComp extends CustomComponent implements ClickListener {
 		usernameField.focus();
 		l.addComponent(passwordField);
 		passwordField.setRequired(true);
+		loginButton.addClickListener(this);
+		
 		l.addComponent(loginButton);
 		l.addComponent(invalidPasswordField);
 		invalidPasswordField.setVisible(false);

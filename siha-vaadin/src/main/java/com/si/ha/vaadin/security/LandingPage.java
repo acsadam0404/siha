@@ -16,7 +16,7 @@ public class LandingPage extends CustomComponent {
 		
 		TabSheet ts = new TabSheet();
 		ts.setSizeUndefined();
-		ts.addTab(new LoginComp(loginListener), "Login");
+		ts.addTab(new LoginComp(loginListener), "Sign In");
 		ts.addTab(new RegistrationComp(), "Registration");
 		
 		
