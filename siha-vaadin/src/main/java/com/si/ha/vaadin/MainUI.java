@@ -14,6 +14,7 @@ import com.si.ha.ServiceLocator;
 import com.si.ha.vaadin.security.LandingPage;
 import com.si.ha.vaadin.security.LoginComp;
 import com.si.ha.vaadin.security.LoginComp.LoginListener;
+import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.UIClassSelectionEvent;
@@ -32,6 +33,7 @@ import com.vaadin.ui.VerticalLayout;
 @org.springframework.stereotype.Component("MainUI")
 @Scope("prototype")
 @Widgetset("com.si.ha.AppWidgetSet")
+@Push
 public class MainUI extends UI implements LoginListener {
 	private static final Logger logger = Logger.getLogger(MainUI.class);
 

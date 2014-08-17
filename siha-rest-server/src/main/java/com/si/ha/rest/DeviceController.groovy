@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.UriComponentsBuilder
 
 import com.si.ha.device.DeviceService
+import com.si.ha.events.DeviceCreatedEvent
+import com.si.ha.events.EventBus
 import com.si.ha.rest.device.Device
 
 @RestController
@@ -49,7 +51,8 @@ class DeviceController {
 	ResponseEntity<Device> createDevice(@RequestBody Device device, UriComponentsBuilder builder) {
 
 		com.si.ha.device.Device createdDevice = deviceService.create(new com.si.ha.device.Device(name: device.name))
-
+		
+		EventBus.post(new DeviceCreatedEvent(createdDevice))
 		HttpHeaders headers = new HttpHeaders()
 		headers.setLocation(
 				builder.path("/rest/devices/{id}")
