@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.si.ha.android.qrcode.IntentIntegrator;
 import com.si.ha.android.qrcode.IntentResult;
-import com.si.ha.rest.device.Device;
 
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -115,13 +114,10 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    class PostDeviceTask extends AsyncTask<String, Void, Device> {
+    class PostDeviceTask extends AsyncTask<String, Void, String> {
 
 
-        protected Device doInBackground(String... content) {
-            Device device = new Device();
-            device.setName(content[0]);
-
+        protected String doInBackground(String... content) {
             RestTemplate restTemplate = new RestTemplate();
             List<HttpMessageConverter<?>> cnvs = new ArrayList<>();
             cnvs.add(new MappingJackson2HttpMessageConverter());
@@ -131,7 +127,7 @@ public class MainActivity extends ActionBarActivity {
             // restTemplate.postForObject("http://acspc.acsadam.hu:18080/siha/rest/devices", device, Device.class);
             try {
                 // XXX itt elég lesz getelni a device IP címével (amit kiolvasunk QR kódból, és így visszakapjuk az egész devicet */
-                Device result = restTemplate.postForObject("http://acspc.acsadam.hu:18080/siha/rest/devices/", device, Device.class);
+                String result = restTemplate.getForObject("http://acspc.acsadam.hu:18080/siha/rest/devices/", String.class);
                 return result;
             } catch (Throwable t) {
                 Log.e("D", "resthívás szar", t);
@@ -140,11 +136,11 @@ public class MainActivity extends ActionBarActivity {
             // Device result = restTemplate.getForObject("http://acspc.acsadam.hu:18080/siha/rest/devices/1", Device.class);
         }
 
-        protected void onPostExecute(Device device) {
+        protected void onPostExecute(String device) {
 
-            Toast.makeText(MainActivity.this, device.getName(), Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, device, Toast.LENGTH_LONG).show();
             Log.i("D", device.toString());
-            ((TextView)findViewById(R.id.scanView)).setText(device.getName());
+            ((TextView)findViewById(R.id.scanView)).setText(device);
 
         }
     }
