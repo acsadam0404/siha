@@ -7,9 +7,17 @@ import javax.persistence.Table
 
 import com.si.ha.BaseEntity
 
+
+import groovy.transform.Canonical
+
+@Canonical
 @Entity
 @Table(name = "device")
-@EqualsAndHashCode
 class Device extends BaseEntity{
-	String name
+	
+	String IP
+	
+	String outputs
+	
+	String inputs
 }

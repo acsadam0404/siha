@@ -1,4 +1,4 @@
-package com.si.ha.device;
+package com.si.ha.device.service;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.si.ha.device.Device;
 
 @Service
 class MockDeviceServiceImpl implements DeviceService {
