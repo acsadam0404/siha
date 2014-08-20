@@ -11,24 +11,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.si.ha.rest.device.*;
 
 import com.si.ha.android.qrcode.IntentIntegrator;
 import com.si.ha.android.qrcode.IntentResult;
+import com.si.ha.rest.device.Device;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -91,9 +85,14 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_refresh) {
-            return true;
+        switch(item.getItemId()) {
+            case R.id.action_devices:
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                break;
+            case R.id.action_speech:
+                startActivity(new Intent(getApplicationContext(), SpeechActivity.class));
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
