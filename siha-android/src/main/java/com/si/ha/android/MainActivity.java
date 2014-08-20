@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.si.ha.android.qrcode.IntentIntegrator;
@@ -46,7 +47,6 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.initiateScan();
-                //new PostDeviceTask().execute("AANDDROOID");
             }
         });
     }
@@ -64,6 +64,8 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(this, "Problem to get the  content Number", Toast.LENGTH_LONG).show();
 
             } else {
+                ((TextView)findViewById(R.id.scanView)).setText(contentsString);
+
                 new PostDeviceTask().execute(contentsString);
             }
 
@@ -128,6 +130,7 @@ public class MainActivity extends ActionBarActivity {
             //String str = restTemplate.getForObject("http://acspc.acsadam.hu:18080/siha/rest/devices", String.class);
             // restTemplate.postForObject("http://acspc.acsadam.hu:18080/siha/rest/devices", device, Device.class);
             try {
+                // XXX itt elég lesz getelni a device IP címével (amit kiolvasunk QR kódból, és így visszakapjuk az egész devicet */
                 Device result = restTemplate.postForObject("http://acspc.acsadam.hu:18080/siha/rest/devices/", device, Device.class);
                 return result;
             } catch (Throwable t) {
@@ -141,6 +144,7 @@ public class MainActivity extends ActionBarActivity {
 
             Toast.makeText(MainActivity.this, device.getName(), Toast.LENGTH_LONG).show();
             Log.i("D", device.toString());
+            ((TextView)findViewById(R.id.scanView)).setText(device.getName());
 
         }
     }
