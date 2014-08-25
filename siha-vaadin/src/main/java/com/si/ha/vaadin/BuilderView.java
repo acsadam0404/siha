@@ -45,7 +45,7 @@ public class BuilderView extends AbstractView {
 				fields.addAll(Arrays.asList(db.getAvailableFields()));
 				fields.add( new NodeType(
                         "diagram-node-condition-icon",
-                        event.getDevice().getName(),
+                        event.getDevice().getIP(),
                         "condition"
                 ));
 				 db.setAvailableFields(fields.toArray(new NodeType[0]));

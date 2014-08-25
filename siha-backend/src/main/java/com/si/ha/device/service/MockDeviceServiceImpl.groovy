@@ -13,8 +13,8 @@ import com.si.ha.device.Device;
 @Service
 class MockDeviceServiceImpl implements DeviceService {
 	List devices = [
-		new Device(name: 'testdevice1', id: 1),
-		new Device(name: 'testdevice2', id: 2)
+		new Device(IP: 'testdevice1', id: 1),
+		new Device(IP: 'testdevice2', id: 2)
 	]
 	
 	@Override

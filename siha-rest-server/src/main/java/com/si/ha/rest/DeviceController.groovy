@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.UriComponentsBuilder
 
-import com.si.ha.device.DeviceService
+import com.si.ha.device.service.DeviceService;
 import com.si.ha.events.DeviceCreatedEvent
 import com.si.ha.events.EventBus
 import com.si.ha.rest.device.Device
@@ -33,7 +33,7 @@ class DeviceController {
 	List<Device> getDevices() {
 		List devices = deviceService.findAll().collect { d ->
 			//TODO lehetne dinamikusan egy transformer metódust hozzáadnia a controllernek a Device osztályhoz
-			new Device(name: d.name)
+			new Device(name: d.IP)
 		}
 		return devices
 	}
@@ -44,13 +44,13 @@ class DeviceController {
 	Device get(@PathVariable('id') id) {
 		com.si.ha.device.Device found = deviceService.get(Long.parseLong(id))
 
-		return new Device(name: found.name) 
+		return new Device(name: found.IP) 
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<Device> createDevice(@RequestBody Device device, UriComponentsBuilder builder) {
 
-		com.si.ha.device.Device createdDevice = deviceService.create(new com.si.ha.device.Device(name: device.name))
+		com.si.ha.device.Device createdDevice = deviceService.create(new com.si.ha.device.Device(IP: device.name))
 		
 		EventBus.post(new DeviceCreatedEvent(createdDevice))
 		HttpHeaders headers = new HttpHeaders()
